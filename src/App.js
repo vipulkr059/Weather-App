@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import WeatherCard from "./Components/WeatherCard";
 
+import styled from "styled-components";
+const Container = styled.div`
+  display: flex;
+  background-color: salmon;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+`;
 function App() {
+  //Search term state
+  const [city, setcity] = useState("Delhi");
+  //Fetch API data state
+  const [data, setData] = useState([]);
+
+  //function for fetching data from api call
+  const getWeather = async (e) => {
+    e.preventDefault();
+    const res = await Axios.get(
+      `${process.env.REACT_APP_API_URL}/weather?q=Delhi&appid=${process.env.REACT_APP_API_KEY}`
+    );
+    setData(res.data);
+    console.log(res.data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <WeatherCard />
+    </Container>
   );
 }
 
