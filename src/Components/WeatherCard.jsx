@@ -8,20 +8,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import sunny from "../Assets/static/day.svg";
-export default function WeatherCard() {
+export default function WeatherCard({ data }) {
+  const city = data;
+  const temp = Math.floor(city?.main?.temp - 273);
+  const MinTemp = Math.floor(city?.main?.temp_min - 273);
+  const MaxTemp = Math.floor(city?.main?.temp_max - 273);
   return (
     <Card>
       <div className="upper">
-        <div className="City">Delhi</div>
+        <div className="City" style={{ fontSize: "2rem" }}>
+          {city.name}, {city.sys.country}
+        </div>
         <div className="info">
           <span className="temprature">
-            {" "}
-            <FontAwesomeIcon icon={faTemperatureLow} size="1x" />
-            25 c
+            <FontAwesomeIcon icon={faTemperatureLow} />
+            {`${temp}°C`}
           </span>
           <span className="iconMain">
             <img src={sunny} alt="" />
-            <p className="condition">Sunny</p>
+            <p className="condition">{city.weather[0].main}</p>
           </span>
         </div>
       </div>
@@ -32,7 +37,7 @@ export default function WeatherCard() {
               {" "}
               <FontAwesomeIcon icon={faTemperatureLow} /> Min Temp
             </label>
-            <span>20 C</span>
+            <span>{`${MinTemp}°C`}</span>
           </div>
           <div>
             <label>
@@ -40,14 +45,17 @@ export default function WeatherCard() {
               <FontAwesomeIcon icon={faDroplet} />
               Humidity
             </label>
-            <span> 20%</span>
+            <span> {city.main.humidity}%</span>
           </div>
           <div>
             <label>
               {" "}
               <FontAwesomeIcon icon={faSun} /> Sunrise
             </label>
-            <span> 2am</span>
+            <span>
+              {" "}
+              {new Date(city.sys.sunrise * 1000).toLocaleTimeString("en-IN")}
+            </span>
           </div>
         </div>
         <div className="row2">
@@ -56,7 +64,7 @@ export default function WeatherCard() {
               {" "}
               <FontAwesomeIcon icon={faTemperatureHigh} /> Max Temp
             </label>
-            <span> 20 C</span>
+            <span> {`${MaxTemp}°C`}</span>
           </div>
           <div>
             <label>
@@ -64,7 +72,7 @@ export default function WeatherCard() {
               <FontAwesomeIcon icon={faWind} />
               Wind
             </label>
-            <span> 25 km/h</span>
+            <span> {city.wind.speed}</span>
           </div>
           <div>
             <label>
@@ -72,7 +80,10 @@ export default function WeatherCard() {
               <FontAwesomeIcon icon={faSun} />
               Sunset
             </label>
-            <span> 20 C</span>
+            <span>
+              {" "}
+              {new Date(city.sys.sunset * 1000).toLocaleTimeString("en-IN")}
+            </span>
           </div>
         </div>
       </div>

@@ -17,19 +17,26 @@ export const Card = styled.div`
     flex: 1;
     color: white;
     justify-content: space-around;
-
-    .iconMain {
+    flex-direction: column;
+    .info {
       display: flex;
-      flex-direction: column;
+      font-size: 4rem;
       align-items: center;
-      justify-content: center;
-      width: 40%;
-      img {
-        width: 100%;
-      }
-      p {
-        font-size: 2rem;
-        margin: 0;
+      gap: 5rem;
+
+      .iconMain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        img {
+          width: 100%;
+        }
+        p {
+          font-size: 2rem;
+          margin: 0;
+        }
       }
     }
   }
@@ -39,7 +46,9 @@ export const Card = styled.div`
     align-items: center;
     justify-content: space-evenly;
     flex: 1;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 0 0 50px 50px;
 
     .row1 {
       display: flex;
