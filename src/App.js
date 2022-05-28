@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
   display: flex;
-  background: #c6ffdd;
-  background: -webkit-linear-gradient(to bottom, #f7797d, #fbd786, #c6ffdd);
-  background: linear-gradient(to bottom, #f7797d, #fbd786, #c6ffdd);
+  background: linear-gradient(90deg, #31092a, #0e0331);
   padding: 0.5rem;
   height: 100vh;
   align-items: center;
@@ -35,7 +33,7 @@ const Search = styled.div`
   }
 
   .searchTerm:focus {
-    color: #00b4cc;
+    color: black;
   }
 
   .searchButton {
