@@ -6,7 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
   display: flex;
-  background-color: salmon;
+  background: #c6ffdd;
+  background: -webkit-linear-gradient(to bottom, #f7797d, #fbd786, #c6ffdd);
+  background: linear-gradient(to bottom, #f7797d, #fbd786, #c6ffdd);
+  padding: 0.5rem;
   height: 100vh;
   align-items: center;
   justify-content: center;
@@ -18,13 +21,17 @@ const Search = styled.div`
   width: 25%;
   .searchTerm {
     width: 100%;
-    border: 3px solid #00b4cc;
+    border: 3px solid #753a88;
     border-right: none;
     padding: 5px;
     height: 20px;
     border-radius: 5px 0 0 5px;
     outline: none;
     color: #9dbfaf;
+  }
+
+  @media (max-width: 800px) {
+    width: auto;
   }
 
   .searchTerm:focus {
@@ -34,8 +41,8 @@ const Search = styled.div`
   .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px solid #00b4cc;
-    background: #00b4cc;
+    border: 1px solid #753a88;
+    background: linear-gradient(to top, #753a88, #cc2b5e);
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -52,23 +59,23 @@ function App() {
   const [longitude, setlongitude] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setlatitude(position.coords.latitude);
-        setlongitude(position.coords.longitude);
-        console.log(longitude);
-      });
-
-      const result = await Axios.get(
-        `${process.env.REACT_APP_API_URL}/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
-      );
-      setData(result.data);
-      console.log(result.data);
-    };
     fetchData();
-  }, [city]);
+  }, []);
+  //Fetching data for current location
+  const fetchData = async () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setlatitude(position.coords.latitude);
+      setlongitude(position.coords.longitude);
+      console.log(position.coords.latitude);
+    });
 
-  //function for fetching data from api call
+    const result = await Axios.get(
+      `${process.env.REACT_APP_API_URL}/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+    );
+    setData(result.data);
+  };
+
+  //function for fetching data from api call for search term
   const getWeatherCity = async (e) => {
     e.preventDefault();
     const res = await Axios.get(

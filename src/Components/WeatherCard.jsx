@@ -39,22 +39,22 @@ export default function WeatherCard({ data }) {
           <div>
             <label>
               {" "}
-              <FontAwesomeIcon icon={faTemperatureLow} /> Min Temp
+              <FontAwesomeIcon icon={faTemperatureLow} /> Min Temp:
             </label>
-            <span>{`${MinTemp}°C`}</span>
+            <span> {`${MinTemp}°C`}</span>
           </div>
           <div>
             <label>
               {" "}
               <FontAwesomeIcon icon={faDroplet} />
-              Humidity
+              &nbsp;Humidity:
             </label>
             <span> {city ? city.main.humidity : "default"}%</span>
           </div>
           <div>
             <label>
               {" "}
-              <FontAwesomeIcon icon={faSun} /> Sunrise
+              <FontAwesomeIcon icon={faSun} /> Sunrise:
             </label>
             <span>
               {" "}
@@ -68,7 +68,7 @@ export default function WeatherCard({ data }) {
           <div>
             <label>
               {" "}
-              <FontAwesomeIcon icon={faTemperatureHigh} /> Max Temp
+              <FontAwesomeIcon icon={faTemperatureHigh} /> Max Temp:
             </label>
             <span> {`${MaxTemp}°C`}</span>
           </div>
@@ -76,7 +76,7 @@ export default function WeatherCard({ data }) {
             <label>
               {" "}
               <FontAwesomeIcon icon={faWind} />
-              Wind
+              &nbsp;Wind:
             </label>
             <span> {city ? city.wind.speed : "default"} </span>
           </div>
@@ -84,7 +84,7 @@ export default function WeatherCard({ data }) {
             <label>
               {" "}
               <FontAwesomeIcon icon={faSun} />
-              Sunset
+              &nbsp;Sunset:
             </label>
             <span>
               {" "}

@@ -3,15 +3,40 @@ import styled from "styled-components";
 export const Card = styled.div`
   display: flex;
   height: 70%;
-  width: 30%;
-  background-color: seashell;
+  width: auto;
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #243b55,
+    #141e30
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #243b55,
+    #141e30
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   border-radius: 50px;
   padding: 1rem;
   flex-direction: column;
+  box-shadow: 0px 7px 8px 2px grey;
 
   .upper {
     display: flex;
-    background-color: #385aff;
+    background: #12c2e9; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #f64f59,
+      #c471ed,
+      #12c2e9
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #f64f59,
+      #c471ed,
+      #12c2e9
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     border-radius: 50px 50px 0 0;
     align-items: center;
     flex: 1;
@@ -42,13 +67,14 @@ export const Card = styled.div`
   }
   .lower {
     display: flex;
-    background-color: aquamarine;
+    background: linear-gradient(to top, #753a88, #cc2b5e);
     align-items: center;
     justify-content: space-evenly;
     flex: 1;
     font-size: 1.2rem;
     padding: 1rem;
     border-radius: 0 0 50px 50px;
+    color: white;
 
     .row1 {
       display: flex;
