@@ -48,12 +48,31 @@ function App() {
   const [city, setcity] = useState();
   //Fetch API data state
   const [data, setData] = useState([]);
+  const [latitude, setlatitude] = useState();
+  const [longitude, setlongitude] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setlatitude(position.coords.latitude);
+        setlongitude(position.coords.longitude);
+        console.log(longitude);
+      });
+
+      const result = await Axios.get(
+        `${process.env.REACT_APP_API_URL}/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+      );
+      setData(result.data);
+      console.log(result.data);
+    };
+    fetchData();
+  }, [city]);
 
   //function for fetching data from api call
-  const getWeather = async (e) => {
+  const getWeatherCity = async (e) => {
     e.preventDefault();
     const res = await Axios.get(
-      `${process.env.REACT_APP_API_URL}/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_API_URL}/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
     );
     setData(res.data);
     console.log(res.data);
@@ -68,11 +87,15 @@ function App() {
           placeholder="City"
           onChange={(e) => setcity(e.target.value)}
         />
-        <button onClick={getWeather} type="submit" class="searchButton">
+        <button onClick={getWeatherCity} type="submit" class="searchButton">
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
         </button>
       </Search>
-      <WeatherCard data={data} />
+      {typeof data.main != "undefined" ? (
+        <WeatherCard data={data} />
+      ) : (
+        <div></div>
+      )}
     </Container>
   );
 }
